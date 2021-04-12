@@ -48,7 +48,7 @@ createPizza({ body }, res) { // body is destructured out of req because it is th
 
 // update pizza by id
 updatePizza({ params, body}, res) {
-    Pizza.findOneAndUpdate({ _id: params.id}, body, { new: true }) // {new: true} returns new version of the document, false returns original document
+    Pizza.findOneAndUpdate({ _id: params.id}, body, { new: true, runValidators: true }) // {new: true} returns new version of the document, false returns original document
     .then(dbPizzaData => {
         if (!dbPizzaData) {
             res.status(404).json({ message: 'No pizza found with this id!'});
